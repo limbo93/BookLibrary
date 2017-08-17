@@ -159,14 +159,51 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708161510218_InitialModel.cs" />
+    <Compile Include="Migrations\201708161510218_InitialModel.Designer.cs">
+      <DependentUpon>201708161510218_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161516562_CustomersTable.cs" />
+    <Compile Include="Migrations\201708161516562_CustomersTable.Designer.cs">
+      <DependentUpon>201708161516562_CustomersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161525243_AddMembershipType.cs" />
+    <Compile Include="Migrations\201708161525243_AddMembershipType.Designer.cs">
+      <DependentUpon>201708161525243_AddMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161530237_PopulateMembershipType.cs" />
+    <Compile Include="Migrations\201708161530237_PopulateMembershipType.Designer.cs">
+      <DependentUpon>201708161530237_PopulateMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161542184_ApplyMigrationToCustomerName.cs" />
+    <Compile Include="Migrations\201708161542184_ApplyMigrationToCustomerName.Designer.cs">
+      <DependentUpon>201708161542184_ApplyMigrationToCustomerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161919145_AddNameToMembershipType.cs" />
+    <Compile Include="Migrations\201708161919145_AddNameToMembershipType.Designer.cs">
+      <DependentUpon>201708161919145_AddNameToMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161920488_PopulateNameOfMembershipType.cs" />
+    <Compile Include="Migrations\201708161920488_PopulateNameOfMembershipType.Designer.cs">
+      <DependentUpon>201708161920488_PopulateNameOfMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161932459_AddBirthdateToCustomer.cs" />
+    <Compile Include="Migrations\201708161932459_AddBirthdateToCustomer.Designer.cs">
+      <DependentUpon>201708161932459_AddBirthdateToCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CustomerFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-cybrog.css" />
@@ -215,6 +252,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -226,6 +265,32 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708161510218_InitialModel.resx">
+      <DependentUpon>201708161510218_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161516562_CustomersTable.resx">
+      <DependentUpon>201708161516562_CustomersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161525243_AddMembershipType.resx">
+      <DependentUpon>201708161525243_AddMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161530237_PopulateMembershipType.resx">
+      <DependentUpon>201708161530237_PopulateMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161542184_ApplyMigrationToCustomerName.resx">
+      <DependentUpon>201708161542184_ApplyMigrationToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161919145_AddNameToMembershipType.resx">
+      <DependentUpon>201708161919145_AddNameToMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161920488_PopulateNameOfMembershipType.resx">
+      <DependentUpon>201708161920488_PopulateNameOfMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161932459_AddBirthdateToCustomer.resx">
+      <DependentUpon>201708161932459_AddBirthdateToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
