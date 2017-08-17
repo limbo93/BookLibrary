@@ -12,8 +12,14 @@ namespace BookLibrary.Models
     {
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Book> Books { get; set; }
 
         public DbSet<MembershipType> MembershipTypes { get; set; }
+
+        public DbSet<BookLanguage> BookLanguages { get; set; }
+
+        public DbSet<BookType> BookTypes { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection")
         {

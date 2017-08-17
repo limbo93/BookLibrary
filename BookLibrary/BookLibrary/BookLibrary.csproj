@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,13 +197,45 @@
     <Compile Include="Migrations\201708161932459_AddBirthdateToCustomer.Designer.cs">
       <DependentUpon>201708161932459_AddBirthdateToCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708170530482_BooksTable.cs" />
+    <Compile Include="Migrations\201708170530482_BooksTable.Designer.cs">
+      <DependentUpon>201708170530482_BooksTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170535380_AddBookLanguage.cs" />
+    <Compile Include="Migrations\201708170535380_AddBookLanguage.Designer.cs">
+      <DependentUpon>201708170535380_AddBookLanguage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170537032_PopulateBookLanguage.cs" />
+    <Compile Include="Migrations\201708170537032_PopulateBookLanguage.Designer.cs">
+      <DependentUpon>201708170537032_PopulateBookLanguage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170559067_AddBookType.cs" />
+    <Compile Include="Migrations\201708170559067_AddBookType.Designer.cs">
+      <DependentUpon>201708170559067_AddBookType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170600445_PopulateBookType.cs" />
+    <Compile Include="Migrations\201708170600445_PopulateBookType.Designer.cs">
+      <DependentUpon>201708170600445_PopulateBookType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170637317_UpdateBookProperty.cs" />
+    <Compile Include="Migrations\201708170637317_UpdateBookProperty.Designer.cs">
+      <DependentUpon>201708170637317_UpdateBookProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170639433_UpdateBookProperty1.cs" />
+    <Compile Include="Migrations\201708170639433_UpdateBookProperty1.Designer.cs">
+      <DependentUpon>201708170639433_UpdateBookProperty1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BookLanguage.cs" />
+    <Compile Include="Models\BookTypes.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\BookFormViewModel.cs" />
     <Compile Include="ViewModel\CustomerFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,9 +270,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -254,6 +284,8 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Books\BookForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -290,6 +322,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708161932459_AddBirthdateToCustomer.resx">
       <DependentUpon>201708161932459_AddBirthdateToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170530482_BooksTable.resx">
+      <DependentUpon>201708170530482_BooksTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170535380_AddBookLanguage.resx">
+      <DependentUpon>201708170535380_AddBookLanguage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170537032_PopulateBookLanguage.resx">
+      <DependentUpon>201708170537032_PopulateBookLanguage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170559067_AddBookType.resx">
+      <DependentUpon>201708170559067_AddBookType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170600445_PopulateBookType.resx">
+      <DependentUpon>201708170600445_PopulateBookType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170637317_UpdateBookProperty.resx">
+      <DependentUpon>201708170637317_UpdateBookProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170639433_UpdateBookProperty1.resx">
+      <DependentUpon>201708170639433_UpdateBookProperty1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

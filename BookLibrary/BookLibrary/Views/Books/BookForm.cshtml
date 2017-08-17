@@ -1,0 +1,42 @@
+﻿@model BookLibrary.ViewModel.BookFormViewModel
+@{
+    ViewBag.Title = "BookForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Book</h2>
+
+@using (Html.BeginForm("Save", "Books"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Name)
+        @Html.TextBoxFor(m => m.Book.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Edition)
+        @Html.TextBoxFor(m => m.Book.Edition, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.ISBN)
+        @Html.TextBoxFor(m => m.Book.ISBN, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.PublishDate)
+        @Html.TextBoxFor(m => m.Book.PublishDate, "{0:d MMM yyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.NumberInStock)
+        @Html.TextBoxFor(m => m.Book.NumberInStock, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.BookLanguage)
+        @Html.DropDownListFor(m => m.Book.BookLanguageId, new SelectList(Model.BookLanguages, "Id", "Name"), "Select Book Language", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.BookType)
+        @Html.DropDownListFor(m => m.Book.BookTypeId, new SelectList(Model.BookTypes, "Id", "Name"), "Select Book Type", new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.Book.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
