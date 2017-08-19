@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using BookLibrary.Dtos;
 using BookLibrary.Models;
 
 namespace BookLibrary.Controllers.Api
@@ -18,41 +20,44 @@ namespace BookLibrary.Controllers.Api
         }
 
         //GET /api/books
-        public IEnumerable<Book> GetBooks()
+        public IEnumerable<BookDto> GetBooks()
         {
-            return _context.Books.ToList();
+            return _context.Books.ToList().Select(Mapper.Map<Book,BookDto>);
         } 
 
 
         //GET /api/books/1
-        public Book GetBook(int id)
+        public BookDto GetBook(int id)
         {
             var book = _context.Books.SingleOrDefault(b => b.Id == id);
             
             if(book==null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return book;
+            return Mapper.Map<Book,BookDto>(book);
         }
 
 
         //POST /api/books/
         [HttpPost]
-        public Book CreateBookeBook(Book book)
+        public BookDto CreateBookeBook(BookDto bookDto)
         {
             if(!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+            var book = Mapper.Map<BookDto, Book>(bookDto);
             _context.Books.Add(book);
             _context.SaveChanges();
 
-            return book;
+            bookDto.Id = book.Id;
+
+            return bookDto;
         }
 
 
         //PUT /api/books/1
         [HttpPut]
-        public void UpdateBook(int id,Book book)
+        public void UpdateBook(int id, BookDto bookDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -62,13 +67,7 @@ namespace BookLibrary.Controllers.Api
             if (bookInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            bookInDb.Name = book.Name;
-            bookInDb.Edition = book.Edition;
-            bookInDb.ISBN = book.ISBN;
-            bookInDb.BookLanguageId = book.BookLanguageId;
-            bookInDb.BookTypeId = book.BookTypeId;
-            bookInDb.NumberInStock = book.NumberInStock;
-            bookInDb.PublishDate = book.PublishDate;
+            Mapper.Map(bookDto, bookInDb);
 
             _context.SaveChanges();
         }
