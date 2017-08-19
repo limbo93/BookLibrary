@@ -31,18 +31,21 @@ namespace BookLibrary.Models
 
 
         [Display(Name = "Number In Stock")]
+        [Range(1, 100)]
         public byte NumberInStock { get; set; }
+
+       
+        public BookLanguage BookLanguage { get; set; }
 
 
         [Display(Name = "Book Language")]
-        public BookLanguage BookLanguage { get; set; }
         public byte BookLanguageId { get; set; }
 
+        
+        public BookType BookType { get; set; }
 
 
         [Display(Name = "Book Type")]
-        public BookType BookType { get; set; }
-
         public byte BookTypeId { get; set; }
 
     }

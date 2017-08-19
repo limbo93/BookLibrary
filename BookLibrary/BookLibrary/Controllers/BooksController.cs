@@ -38,15 +38,28 @@ namespace BookLibrary.Controllers
             var bookLanguage = _context.BookLanguages.ToList();
             var bookType = _context.BookTypes.ToList();
             var viewModel = new BookFormViewModel
-            {
+            {         
                 BookLanguages = bookLanguage,
                 BookTypes = bookType
             };
             return View("BookForm",viewModel);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Book book)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new BookFormViewModel(book)
+                {
+                    BookLanguages = _context.BookLanguages.ToList(),
+                    BookTypes = _context.BookTypes.ToList()
+                };
+                return View("BookForm", viewModel);
+            }
+
             if(book.Id==0)
                 _context.Books.Add(book);
             else
@@ -72,9 +85,8 @@ namespace BookLibrary.Controllers
             if (book == null)
                 return HttpNotFound();
 
-            var viewModel = new BookFormViewModel
+            var viewModel = new BookFormViewModel(book)
             {
-                Book = book,
                 BookLanguages = _context.BookLanguages.ToList(),
                 BookTypes = _context.BookTypes.ToList()
             };
