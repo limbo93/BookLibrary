@@ -15,13 +15,14 @@
 }
 else
 {
-    <table class="table table-bordered table-hover">
+    <table id="books" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Name</th>              
                 <th>Language</th>
                 <th>Number In Stock</th>
-                <th>Book Type</th>
+                @*<th>Book Type</th>*@
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -32,8 +33,32 @@ else
                     <td>@book.BookLanguage.Name</td>
                     <td>@book.NumberInStock</td>
                     @*<td>@book.BookType.Name</td>*@
+                    <td>
+                        <button data-book-id="@book.Id" class="btn-link js-delete">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#books .js-delete").on("click", function () {
+                var button = $(this);
+                if (confirm("Are u sure to delete this book?")) {
+                    $.ajax({
+                        url: "/api/books/" + button.attr("data-book-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
 }
