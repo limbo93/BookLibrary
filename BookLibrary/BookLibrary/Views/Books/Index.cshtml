@@ -46,6 +46,9 @@ else
 {
     <script>
         $(document).ready(function () {
+            
+            $("#books").DataTable();
+
             $("#books").on("click",".js-delete", function () {
                 var button = $(this);
                 bootbox.confirm("Are you sure to delete this book?", function(result) {
