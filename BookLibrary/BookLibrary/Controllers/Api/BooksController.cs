@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,7 +23,7 @@ namespace BookLibrary.Controllers.Api
         //GET /api/books
         public IHttpActionResult GetBooks()
         {
-            var bookDto=_context.Books.ToList().Select(Mapper.Map<Book,BookDto>);
+            var bookDto=_context.Books.Include(b=>b.BookLanguage).ToList().Select(Mapper.Map<Book,BookDto>);
             return Ok(bookDto);
         } 
 

@@ -34,6 +34,9 @@ namespace BookLibrary.Dtos
         public byte NumberInStock { get; set; }
 
 
+        public BookLanguageDto BookLanguage { get; set; }
+
+
         [Required]
         public byte BookLanguageId { get; set; }
 

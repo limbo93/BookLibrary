@@ -9,12 +9,6 @@
     @Html.ActionLink("New Book", "New", "Books", null, new { @class = "btn btn-primary" })
 </p>
 
-@if (!Model.Any())
-{
-    <p>We don't have any book.</p>
-}
-else
-{
     <table id="books" class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -25,39 +19,53 @@ else
                 <th>Delete</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var book in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(book.Name, "Edit", "Books", new { id = book.Id }, null)</td>
-                    <td>@book.BookLanguage.Name</td>
-                    <td>@book.NumberInStock</td>
-                    @*<td>@book.BookType.Name</td>*@
-                    <td>
-                        <button data-book-id="@book.Id" class="btn-link js-delete">Delete</button>
-                    </td>
-                </tr>
-            }
+        <tbody>           
         </tbody>
     </table>
-}
+
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            
-            $("#books").DataTable();
+            var table = $("#books").DataTable(
+            {
+                ajax: {
+                    url: "/api/books",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, book) {
+                            return "<a href='/books/edit/" + book.id + "'>" + book.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "bookLanguage.name"
+                    },
+                    {
+                        data: "numberInStock"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-book-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
 
-            $("#books").on("click",".js-delete", function () {
+            $("#books").on("click", ".js-delete", function () {
                 var button = $(this);
-                bootbox.confirm("Are you sure to delete this book?", function(result) {
+
+                bootbox.confirm("Are you sure to delete this book?", function (result) {
                     if (result) {
                         $.ajax({
                             url: "/api/books/" + button.attr("data-book-id"),
                             method: "DELETE",
                             success: function () {
-                                button.parents("tr").remove();
+                                table.row(button.parents("tr")).remove().draw();
                             }
                         });
                     }

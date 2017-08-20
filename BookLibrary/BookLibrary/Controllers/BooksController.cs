@@ -26,10 +26,8 @@ namespace BookLibrary.Controllers
         //
         // GET: /Books/
         public ActionResult Index()
-        {
-            var book = _context.Books.Include(b=>b.BookLanguage).ToList();
-     
-            return View(book);
+        {    
+            return View();
         }
 
 
