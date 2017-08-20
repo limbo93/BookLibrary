@@ -46,18 +46,19 @@ else
 {
     <script>
         $(document).ready(function () {
-            $("#books .js-delete").on("click", function () {
+            $("#books").on("click",".js-delete", function () {
                 var button = $(this);
-                if (confirm("Are u sure to delete this book?")) {
-                    $.ajax({
-                        url: "/api/books/" + button.attr("data-book-id"),
-                        method: "DELETE",
-                        success: function () {
-                            button.parents("tr").remove();
-                        }
-                    });
-                }
-
+                bootbox.confirm("Are you sure to delete this book?", function(result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/books/" + button.attr("data-book-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>
