@@ -14,9 +14,12 @@ namespace BookLibrary.App_Start
         {
 
             Mapper.CreateMap<Customer, CustomerDto>();
-            Mapper.CreateMap<CustomerDto, Customer>();
+            //.ForMember(c => c.Id, opt => opt.Ignore());
+            Mapper.CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, opt => opt.Ignore());
+
             Mapper.CreateMap<Book, BookDto>();
-            Mapper.CreateMap<BookDto, Book>();
+            //.ForMember(b => b.Id, opt => opt.Ignore());
+            Mapper.CreateMap<BookDto, Book>().ForMember(b => b.Id, opt => opt.Ignore());
         }
     }
 }

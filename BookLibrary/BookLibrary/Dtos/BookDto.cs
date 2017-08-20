@@ -33,5 +33,12 @@ namespace BookLibrary.Dtos
         [Range(1, 100)]
         public byte NumberInStock { get; set; }
 
+
+        [Required]
+        public byte BookLanguageId { get; set; }
+
+
+        [Required]
+        public byte BookTypeId { get; set; }
     }
 }

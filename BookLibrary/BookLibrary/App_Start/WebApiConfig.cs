@@ -11,6 +11,7 @@ namespace BookLibrary
     {
         public static void Register(HttpConfiguration config)
         {
+            //Camel Case Notation for Json
             var settings = config.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver=new CamelCasePropertyNamesContractResolver();
             settings.Formatting=Formatting.Indented;
