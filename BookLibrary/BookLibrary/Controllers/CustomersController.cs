@@ -26,11 +26,15 @@ namespace BookLibrary.Controllers
         //
         // GET: /Customers/
         public ActionResult Index()
-        {            
-            return View();
+        {
+            if (User.IsInRole(RoleName.CanManageCustomers))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
 
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -44,6 +48,7 @@ namespace BookLibrary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult Save(Customer customer)
         {
             if (!ModelState.IsValid)
@@ -72,6 +77,7 @@ namespace BookLibrary.Controllers
         }
 
 
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);

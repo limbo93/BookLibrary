@@ -252,6 +252,42 @@
     <Compile Include="Migrations\201708191025494_AddRangeInNumberInStockOfBook.Designer.cs">
       <DependentUpon>201708191025494_AddRangeInNumberInStockOfBook.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708201807199_AuthorNameAddedInBookModel.cs" />
+    <Compile Include="Migrations\201708201807199_AuthorNameAddedInBookModel.Designer.cs">
+      <DependentUpon>201708201807199_AuthorNameAddedInBookModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708201811408_AuthorNameDroppedFromBookModel.cs" />
+    <Compile Include="Migrations\201708201811408_AuthorNameDroppedFromBookModel.Designer.cs">
+      <DependentUpon>201708201811408_AuthorNameDroppedFromBookModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708201819349_EmailAddressAddedReplacingUserName.cs" />
+    <Compile Include="Migrations\201708201819349_EmailAddressAddedReplacingUserName.Designer.cs">
+      <DependentUpon>201708201819349_EmailAddressAddedReplacingUserName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708201825160_EmailAddressAddedReplacingUserName1.cs" />
+    <Compile Include="Migrations\201708201825160_EmailAddressAddedReplacingUserName1.Designer.cs">
+      <DependentUpon>201708201825160_EmailAddressAddedReplacingUserName1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708201830528_EmailAddressDroppedFromAccountViewModel.cs" />
+    <Compile Include="Migrations\201708201830528_EmailAddressDroppedFromAccountViewModel.Designer.cs">
+      <DependentUpon>201708201830528_EmailAddressDroppedFromAccountViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708211304166_AddEmailAddressToApplicationUser.cs" />
+    <Compile Include="Migrations\201708211304166_AddEmailAddressToApplicationUser.Designer.cs">
+      <DependentUpon>201708211304166_AddEmailAddressToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708211607023_DropEmailAddressFromApplicationUser.cs" />
+    <Compile Include="Migrations\201708211607023_DropEmailAddressFromApplicationUser.Designer.cs">
+      <DependentUpon>201708211607023_DropEmailAddressFromApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708211740449_SeedUser.cs" />
+    <Compile Include="Migrations\201708211740449_SeedUser.Designer.cs">
+      <DependentUpon>201708211740449_SeedUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708211851140_SeedUser1.cs" />
+    <Compile Include="Migrations\201708211851140_SeedUser1.Designer.cs">
+      <DependentUpon>201708211851140_SeedUser1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -261,6 +297,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Min18YearsIfMember.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\BookFormViewModel.cs" />
@@ -485,10 +522,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\List.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
-    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Books\List.cshtml" />
     <Content Include="Views\Books\BookForm.cshtml" />
+    <Content Include="Views\Books\ReadOnlyList.cshtml" />
+    <Content Include="Views\Customers\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -549,6 +588,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708191025494_AddRangeInNumberInStockOfBook.resx">
       <DependentUpon>201708191025494_AddRangeInNumberInStockOfBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708201807199_AuthorNameAddedInBookModel.resx">
+      <DependentUpon>201708201807199_AuthorNameAddedInBookModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708201811408_AuthorNameDroppedFromBookModel.resx">
+      <DependentUpon>201708201811408_AuthorNameDroppedFromBookModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708201819349_EmailAddressAddedReplacingUserName.resx">
+      <DependentUpon>201708201819349_EmailAddressAddedReplacingUserName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708201825160_EmailAddressAddedReplacingUserName1.resx">
+      <DependentUpon>201708201825160_EmailAddressAddedReplacingUserName1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708201830528_EmailAddressDroppedFromAccountViewModel.resx">
+      <DependentUpon>201708201830528_EmailAddressDroppedFromAccountViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211304166_AddEmailAddressToApplicationUser.resx">
+      <DependentUpon>201708211304166_AddEmailAddressToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211607023_DropEmailAddressFromApplicationUser.resx">
+      <DependentUpon>201708211607023_DropEmailAddressFromApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211740449_SeedUser.resx">
+      <DependentUpon>201708211740449_SeedUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211851140_SeedUser1.resx">
+      <DependentUpon>201708211851140_SeedUser1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -26,11 +26,15 @@ namespace BookLibrary.Controllers
         //
         // GET: /Books/
         public ActionResult Index()
-        {    
-            return View();
+        {
+            if (User.IsInRole(RoleName.CanManageBook))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
 
+        [Authorize(Roles = RoleName.CanManageBook)]
         public ActionResult New()
         {
             var bookLanguage = _context.BookLanguages.ToList();
@@ -46,6 +50,7 @@ namespace BookLibrary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageBook)]
         public ActionResult Save(Book book)
         {
             if (!ModelState.IsValid)
@@ -76,6 +81,8 @@ namespace BookLibrary.Controllers
             return RedirectToAction("Index", "Books");
         }
 
+
+        [Authorize(Roles = RoleName.CanManageBook)]
         public ActionResult Edit(int id)
         {
             var book = _context.Books.SingleOrDefault(b => b.Id == id);
