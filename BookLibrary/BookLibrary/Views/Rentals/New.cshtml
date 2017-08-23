@@ -10,14 +10,14 @@
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container">
-            <input id="customer" name="customer" data-rule-validcustomer="true" required type="text" value="" class="form-control" />
+            <input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
         </div>
     </div>
 
     <div class="form-group">
         <label>Book</label>
         <div class="tt-container">
-            <input id="book" name="book" data-rule-atleastonemovie="true" type="text" value="" class="form-control" />
+            <input id="book" name="book" data-rule-atLeastOneBook="true" type="text" value="" class="form-control" />
         </div>
     </div>
 
@@ -34,10 +34,11 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
             var vm = {
-                bookIds:[]
+                bookIds: []
             };
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -50,15 +51,15 @@
 
             $('#customer').typeahead({
                 minLength: 2,
-                highlight:true                   
+                highlight: true
             }, {
                 name: 'customers',
                 display: 'name',
                 source: customers
-            }).on("typeahead:select",function(e, customer) {
+            }).on("typeahead:select", function (e, customer) {
                 vm.customerId = customer.id;
             });
-            
+
             var books = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -82,7 +83,42 @@
 
                 vm.bookIds.push(book.id);
             });
-            
+
+            $.validator.addMethod("validCustomer", function () {
+                return vm.customerId && vm.customerId !== 0;
+            }, "Please select a valid customer.");
+
+
+            $.validator.addMethod("atLeastOneBook", function () {
+                return vm.bookIds.length > 0;
+            }, "Please select at least one movie.");
+
+            var validator = $('#newRental').validate({
+                submitHandler: function () {
+                    $.ajax({
+                        url: "/api/newRentals",
+                        method: "post",
+                        data: vm
+                    })
+                    .done(function () {
+                        toastr.success("Rentals successfully recorded.");
+
+                        $("#customer").typeahead("val", "");
+                        $("#book").typeahead("val", "");
+                        $("#books").empty();
+
+                        vm = { bookIds: [] };
+
+                        validator.resetForm();
+                    })
+                    .fail(function () {
+                        toastr.error("Something unexpected happened.");
+                    });
+
+                    return false;
+                }
+            });
+
         });
     </script>
 }
