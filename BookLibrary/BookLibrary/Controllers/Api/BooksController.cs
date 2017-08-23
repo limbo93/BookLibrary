@@ -21,9 +21,18 @@ namespace BookLibrary.Controllers.Api
         }
 
         //GET /api/books
-        public IHttpActionResult GetBooks()
+        public IHttpActionResult GetBooks(string query = null)
         {
-            var bookDto=_context.Books.Include(b=>b.BookLanguage).ToList().Select(Mapper.Map<Book,BookDto>);
+            var booksQuery = _context.Books
+                .Include(b => b.BookLanguage)
+                .Where(b => b.NumberAvailable > 0);
+
+            if(!String.IsNullOrWhiteSpace(query))
+                booksQuery=booksQuery.Where(b=>b.Name.Contains(query));
+
+            var bookDto = booksQuery
+                .ToList()
+                .Select(Mapper.Map<Book, BookDto>);
             return Ok(bookDto);
         } 
 

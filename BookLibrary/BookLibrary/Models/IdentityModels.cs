@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using BookLibrary.Dtos;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BookLibrary.Models
@@ -20,6 +21,8 @@ namespace BookLibrary.Models
         public DbSet<BookLanguage> BookLanguages { get; set; }
 
         public DbSet<BookType> BookTypes { get; set; }
+
+        public DbSet<Rental> Rentals { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection")

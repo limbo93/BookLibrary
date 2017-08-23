@@ -48,5 +48,7 @@ namespace BookLibrary.Models
         [Display(Name = "Book Type")]
         public byte BookTypeId { get; set; }
 
+        public byte NumberAvailable { get; set; }   
+
     }
 }
